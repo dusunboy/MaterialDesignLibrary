@@ -54,6 +54,7 @@ public class ButtonRectangle extends Button {
 		
 		// Set Padding
 		String value = attrs.getAttributeValue(ANDROIDXML,"padding");
+		String textSizeValue = attrs.getAttributeValue(ANDROIDXML,"textSize");
 //		if(value != null){
 //			float padding = Float.parseFloat(value.replace("dip", ""));
 //			paddingBottom = Utils.dpToPx(padding, getResources());
@@ -85,6 +86,9 @@ public class ButtonRectangle extends Button {
 			textButton.setText(text);
 			textButton.setTextColor(Color.WHITE);
 			textButton.setTypeface(null, Typeface.BOLD);
+			float textSize = (textSizeValue == null) ? 15 : Float.parseFloat(textSizeValue.replace("dip", "").
+					replace("dp", "").replace("sp", ""));
+			textButton.setTextSize(textSize);
 			RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
 			params.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
 			params.setMargins(Utils.dpToPx(5, getResources()), Utils.dpToPx(5, getResources()), Utils.dpToPx(5, getResources()), Utils.dpToPx(5, getResources()));
@@ -138,5 +142,6 @@ public class ButtonRectangle extends Button {
 	public TextView getTextView() {
 		return textButton;
 	}
+	
 
 }
