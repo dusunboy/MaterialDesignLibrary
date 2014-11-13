@@ -117,6 +117,7 @@ final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
 //				if(onClickListener != null)
 //					onClickListener.onClick(this);
 			}
+			
 			if(onClickListener != null)
 				onClickListener.onClick(this);
 			return output;
