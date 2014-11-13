@@ -114,9 +114,11 @@ final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
 				x = -1;
 				y = -1;
 				radius = getHeight()/rippleSize;
-				if(onClickListener != null)
-					onClickListener.onClick(this);
+//				if(onClickListener != null)
+//					onClickListener.onClick(this);
 			}
+			if(onClickListener != null)
+				onClickListener.onClick(this);
 			return output;
 		}
 		
