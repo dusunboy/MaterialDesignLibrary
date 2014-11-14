@@ -1,8 +1,10 @@
 package com.gc.materialdesign.views;
 
+import com.gc.materialdesign.R;
 import com.gc.materialdesign.utils.Utils;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -16,18 +18,19 @@ public class ProgressBarCircularIndetermininate extends CustomView {
 	
 	
 	final static String ANDROIDXML = "http://schemas.android.com/apk/res/android";
-	
+
 	int backgroundColor = Color.parseColor("#1E88E5");
+
 	
 
 	public ProgressBarCircularIndetermininate(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		setAttributes(attrs);
+		setAttributes(context, attrs);
 		
 	}
 	
 	// Set atributtes of XML to View
-		protected void setAttributes(AttributeSet attrs){
+		protected void setAttributes(Context context, AttributeSet attrs){
 			
 			setMinimumHeight(Utils.dpToPx(32, getResources()));
 			setMinimumWidth(Utils.dpToPx(32, getResources()));
@@ -35,7 +38,16 @@ public class ProgressBarCircularIndetermininate extends CustomView {
 			//Set background Color
 			// Color by resource
 			int bacgroundColor = attrs.getAttributeResourceValue(ANDROIDXML,"background",-1);
-			if(bacgroundColor != -1){
+//			float density = context.getResources().getDisplayMetrics().density;
+
+			TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.ProgressBarCircularAttributes);
+			boolean firstAnimation = typedArray.getBoolean(R.styleable.ProgressBarCircularAttributes_firstAnimation, true);	
+			
+			firstAnimationOver = !firstAnimation;
+			if (!firstAnimation) {
+				cont = 1;
+			}
+	        if(bacgroundColor != -1){
 				setBackgroundColor(getResources().getColor(bacgroundColor));
 			}else{
 				// Color by hexadecimal
@@ -80,7 +92,7 @@ public class ProgressBarCircularIndetermininate extends CustomView {
 	float radius1 = 0;
 	float radius2 = 0;
 	int cont = 0;
-	boolean firstAnimationOver = false;
+	boolean firstAnimationOver;
 	/**
 	 * Draw first animation of view
 	 * @param canvas
